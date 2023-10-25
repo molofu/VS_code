@@ -9,7 +9,7 @@ union
 int main()
 {
 
-
+    //这是一个注释
     un.a=0x12345678;
 
     if(un.b == 0x78)
