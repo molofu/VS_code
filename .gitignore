@@ -1,0 +1,13 @@
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.exe
+*.suo
+*.db
+*.ipch
+debug/
+.vs
+.gitignore
+
+*.out
