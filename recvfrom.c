@@ -46,7 +46,7 @@ int main(int argc, char const *argv[])
 
     while (1)
     {
-        if (recvfrom(sockfd, buf, N, 0, (struct sockaddr *)&clientaddr, &addrlen) == -1) // 函数只需要网络信息的通用结构体
+        if (recvfrom(sockfd, buf, 128, 0, (struct sockaddr *)&clientaddr, &addrlen) == -1) // 函数只需要网络信息的通用结构体
         {
             perror("fail to recvfrom");
             exit(1);
@@ -60,6 +60,17 @@ int main(int argc, char const *argv[])
 
         // 打印接受到数据
         printf("from client: %s\n", buf);
+        
+
+        //向客户端回复数据 ，此处直接追加一个字符回复
+        strcat(buf, " *_*");
+
+        if(sendto(sockfd,buf,128,0,(struct sockaddr*)&clientaddr,addrlen)==-1)
+        {
+            perror("fail to sendto");
+            exit(1);
+        }
+        
         memset(buf, 0, 128); // buf内容置为0,ASCII 0 代表\0;
     }
 

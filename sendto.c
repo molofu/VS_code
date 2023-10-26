@@ -7,6 +7,7 @@
 #include <unistd.h>     //close
 #include <string.h>
 
+//udp客户端实现
 int main(int argc, char const *argv[])
 {
 
@@ -51,6 +52,15 @@ int main(int argc, char const *argv[])
             perror("fail to sendto");
             exit(1);
         }
+
+        //客户端接受数据
+        char text[128] = "";
+        if(recvfrom(sockfd,text,128,0,(struct sockaddr*)&serveraddr,&addrlen)==-1)
+        {
+            perror("fail to recvfrom");
+            exit(1);
+        }
+        printf("from server: %s\n", text);
     }
 
     // 4.关闭套接字文件描述符
