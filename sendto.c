@@ -38,8 +38,8 @@ int main(int argc, char const *argv[])
 
     // 通用 IP地址 由命令行输入IP地址
     serveraddr.sin_addr.s_addr = inet_addr(argv[1]); // argv是char类型的，atoi 将一个 数字型的字符串类型转化为整形
-    serveraddr.sin_port = htons(atoi(argv[2]));      // hton将主机字节序转化为网络字节序  网络字节序为大端，主机在该计算机上为小端存储
-
+    serveraddr.sin_port =htons(atoi(argv[2]));      // hton将主机字节序转化为网络字节序  网络字节序为大端，主机在该计算机上为小端存储
+    //printf("%hd\n", serveraddr.sin_port);
     // 3.发送数据
     char buf[128] = "";
     while (1)
