@@ -6,8 +6,9 @@
 #include <unistd.h>
 #include <signal.h>
 
-#define INITSIZE 10
+#define INIT_SIZE 10
 typedef int ElemType;
+#define ADD_SIZE 3
 
 typedef struct SeqList
 {
@@ -17,6 +18,8 @@ typedef struct SeqList
 } SeqList;
 
 void showMenu();
+
+int add_size(SeqList *list);
 
 void InitSeqList(SeqList *list);
 

@@ -13,17 +13,30 @@ void showMenu()
     printf("********************************************\n");
 }
 
+int add_size(SeqList *list)
+{
+    ElemType *new_base = (ElemType *)realloc(list->base, sizeof(ElemType) * (list->size + ADD_SIZE));
+    if (new_base == NULL)
+    {
+        printf("内存不足,扩容失败\n");
+        return 0;
+    }
+    list->base = new_base;
+    list->capacity += ADD_SIZE;
+    return 1;
+}
+
 void InitSeqList(SeqList *list)
 {
-    list->base = (ElemType *)malloc(sizeof(ElemType) * INITSIZE);
+    list->base = (ElemType *)malloc(sizeof(ElemType) * INIT_SIZE);
     assert(list->base != NULL);
-    list->capacity = INITSIZE;
+    list->capacity = INIT_SIZE;
     list->size = 0;
 }
 
 void push_back(SeqList *list, ElemType val)
 {
-    if (list->size >= list->capacity)
+    if (list->size >= list->capacity && !add_size(list))
     {
         printf("顺序表已满,无法插入\n");
         return;
@@ -37,7 +50,7 @@ void push_back(SeqList *list, ElemType val)
 
 void push_front(SeqList *list, ElemType val)
 {
-    if (list->size >= list->capacity)
+    if (list->size >= list->capacity && !add_size(list))
     {
         printf("顺序表已满,无法插入\n");
         return;
@@ -90,7 +103,11 @@ void insert_pos(SeqList *list, int pos, ElemType val)
         printf("插入位置有误\n");
         return;
     }
-
+    if (list->size >= list->capacity && !add_size(list))
+    {
+        printf("顺序表已满,无法插入\n");
+        return;
+    }
     for (int i = list->size; i > pos; i--)
     {
         list->base[i] = list->base[i - 10];
