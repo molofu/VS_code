@@ -11,7 +11,7 @@ typedef int ElemType;
 #define ADD_SIZE 3
 
 typedef struct SeqList
-{
+{ 
     ElemType *base;
     int capacity;
     int size;
